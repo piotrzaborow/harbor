@@ -1,0 +1,39 @@
+name: Build Harbor
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+  build:
+    strategy:
+      matrix:
+        os: [mac, ubuntu, windows]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build Harbor (arm)
+        run: bun run build:${{matrix.os}}:arm
+
+      - name: Build Harbor (x64)
+        run: bun run build:${{matrix.os}}:x64
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: harbor-${{matrix.os}}
+          path: dist
