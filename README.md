@@ -12,11 +12,29 @@ Harbor is a blazingly fast, modern Terminal UI (TUI) application for managing yo
 
 ## Installation
 
+### Option 1: NPM (Recommended)
+
+You can install Harbor globally via NPM. This will automatically download the correct standalone binary for your operating system:
+
+```bash
+npm install -g harbor
+```
+
+### Option 2: Homebrew (macOS / Linux)
+
+You can install Harbor directly from this repository using Homebrew:
+
+```bash
+brew install piotrzaborow/harbor/harbor
+```
+
+### Option 3: From Source
+
 Ensure you have [Bun](https://bun.sh) installed.
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/harbor.git
+git clone https://github.com/piotrzaborow/harbor.git
 cd harbor
 
 # Install dependencies

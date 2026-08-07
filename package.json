@@ -1,9 +1,17 @@
 {
   "name": "harbor",
+  "version": "0.1.0",
   "module": "src/index.tsx",
   "type": "module",
-  "private": true,
+  "bin": {
+    "harbor": "bin/harbor"
+  },
+  "files": [
+    "bin",
+    "scripts/npm-install.js"
+  ],
   "scripts": {
+    "postinstall": "node scripts/npm-install.js",
     "start": "bun run build && sudo ./dist/harbor",
     "test": "bun test",
     "test:e2e": "bun test tests/e2e.test.ts",
