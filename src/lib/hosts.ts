@@ -24,7 +24,7 @@ export function getHostsFilePath(): string {
 export function parseHosts(content: string): HostLine[] {
   const lines = content.split(/\r?\n/);
   return lines.map((line, index) => {
-    const id = `line-${index}-${Date.now()}`;
+    const id = `line-${index}-${crypto.randomUUID()}`;
     const trimmed = line.trim();
 
     if (trimmed === '') {

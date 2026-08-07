@@ -13,10 +13,15 @@
     "build:mac:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-darwin-x64 --outfile dist/harbor-mac-x64",
     "build:ubuntu:arm": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-linux-arm64 --outfile dist/harbor-linux-arm",
     "build:ubuntu:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-linux-x64 --outfile dist/harbor-linux-x64",
-    "build:windows:arm": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-windows-arm64 --outfile dist/harbor-windows-arm",
-    "build:windows:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-windows-x64 --outfile dist/harbor-windows-x64"
+    "build:windows:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-windows-x64 --outfile dist/harbor-windows-x64.exe"
   },
   "devDependencies": {
+    "@opentui/core-darwin-arm64": "0.5.1",
+    "@opentui/core-darwin-x64": "0.5.1",
+    "@opentui/core-linux-arm64": "0.5.1",
+    "@opentui/core-linux-x64": "0.5.1",
+    "@opentui/core-win32-arm64": "0.5.1",
+    "@opentui/core-win32-x64": "0.5.1",
     "@types/bun": "latest",
     "@types/react": "^19.2.18"
   },

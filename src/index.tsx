@@ -33,13 +33,13 @@ function App() {
     setLines(loaded);
   }, []);
 
-  const entryLines = lines.filter((l: HostLine) => l.type === 'entry');
+  const entryLines = React.useMemo(() => lines.filter((l: HostLine) => l.type === 'entry'), [lines]);
   const selectedEntry = entryLines[selectedIndex];
 
   const handleSaveDomain = (ip: string, domain: string) => {
     if (modalState === 'add') {
       const newEntry: HostLine = {
-        id: `entry-${Date.now()}`,
+        id: `entry-${crypto.randomUUID()}`,
         type: 'entry',
         raw: `${ip}\t${domain}`,
         ip,

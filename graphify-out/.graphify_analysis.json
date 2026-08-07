@@ -1,0 +1,283 @@
+{
+  "communities": {
+    "0": [
+      "src_components_domainform",
+      "src_components_domainform_domainform",
+      "src_components_domainform_domainformprops",
+      "src_components_domaininfo",
+      "src_components_domaininfo_domaininfo",
+      "src_components_domaininfo_domaininfoprops",
+      "src_components_domainlist",
+      "src_components_domainlist_domainlist",
+      "src_components_domainlist_domainlistprops",
+      "src_components_topnav",
+      "src_components_topnav_topnav",
+      "src_index",
+      "src_index_app",
+      "src_index_expandtilde",
+      "src_lib_config",
+      "src_lib_config_exporttoconf",
+      "src_lib_config_importfromconf",
+      "src_lib_config_test",
+      "src_lib_hosts",
+      "src_lib_hosts_gethostsfilepath",
+      "src_lib_hosts_hostline",
+      "src_lib_hosts_loadsystemhosts",
+      "src_lib_hosts_parsehosts",
+      "src_lib_hosts_savesystemhosts",
+      "src_lib_hosts_serializehosts",
+      "src_lib_hosts_test"
+    ],
+    "1": [
+      "ref_esnext",
+      "tsconfig",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_allowimportingtsextensions",
+      "tsconfig_compileroptions_allowjs",
+      "tsconfig_compileroptions_jsx",
+      "tsconfig_compileroptions_jsximportsource",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduledetection",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_compileroptions_noimplicitoverride",
+      "tsconfig_compileroptions_nopropertyaccessfromindexsignature",
+      "tsconfig_compileroptions_nouncheckedindexedaccess",
+      "tsconfig_compileroptions_nounusedlocals",
+      "tsconfig_compileroptions_nounusedparameters",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_strict",
+      "tsconfig_compileroptions_target",
+      "tsconfig_compileroptions_verbatimmodulesyntax"
+    ],
+    "2": [
+      "package",
+      "package_devdependencies",
+      "package_devdependencies_types_bun",
+      "package_devdependencies_types_react",
+      "package_module",
+      "package_name",
+      "package_peerdependencies",
+      "package_peerdependencies_typescript",
+      "package_private",
+      "package_type",
+      "types_bun",
+      "types_react",
+      "typescript"
+    ],
+    "3": [
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_build_mac_arm",
+      "package_scripts_build_mac_x64",
+      "package_scripts_build_ubuntu_arm",
+      "package_scripts_build_ubuntu_x64",
+      "package_scripts_build_windows_arm",
+      "package_scripts_build_windows_x64",
+      "package_scripts_dev",
+      "package_scripts_start",
+      "package_scripts_test",
+      "package_scripts_test_e2e"
+    ],
+    "4": [
+      "fast_xml_parser",
+      "opentui_core",
+      "opentui_react",
+      "package_dependencies",
+      "package_dependencies_fast_xml_parser",
+      "package_dependencies_opentui_core",
+      "package_dependencies_opentui_react",
+      "package_dependencies_react",
+      "react"
+    ],
+    "5": [
+      "scratch",
+      "scratch_expandedpath",
+      "scratch_expandtilde",
+      "scratch_isabs",
+      "scratch_searchdir"
+    ],
+    "6": [
+      "test_filter",
+      "test_filter_files",
+      "test_filter_isabs",
+      "test_filter_processed",
+      "test_filter_searchdir"
+    ],
+    "7": [
+      "src_components_filemodal",
+      "src_components_filemodal_expandtilde",
+      "src_components_filemodal_filemodal",
+      "src_components_filemodal_filemodalprops"
+    ],
+    "8": [
+      "src_components_actionpanel",
+      "src_components_actionpanel_actionpanel",
+      "src_components_actionpanel_actionpanelprops"
+    ],
+    "9": [
+      "src_lib_dns",
+      "src_lib_dns_execasync",
+      "src_lib_dns_flushdns"
+    ],
+    "10": [
+      "test",
+      "test_a"
+    ],
+    "11": [
+      "test_input",
+      "test_input_app"
+    ],
+    "12": [
+      "tests_e2e_test"
+    ]
+  },
+  "cohesion": {
+    "0": 0.17846153846153845,
+    "1": 0.09090909090909091,
+    "2": 0.15384615384615385,
+    "3": 0.16666666666666666,
+    "4": 0.2222222222222222,
+    "5": 0.4,
+    "6": 0.4,
+    "7": 0.6666666666666666,
+    "8": 0.6666666666666666,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0
+  },
+  "gods": [
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 20
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 12
+    },
+    {
+      "id": "src_lib_hosts_hostline",
+      "label": "HostLine",
+      "degree": 8
+    },
+    {
+      "id": "src_index_app",
+      "label": "App()",
+      "degree": 7
+    },
+    {
+      "id": "src_lib_hosts_loadsystemhosts",
+      "label": "loadSystemHosts()",
+      "degree": 5
+    },
+    {
+      "id": "src_lib_hosts_savesystemhosts",
+      "label": "saveSystemHosts()",
+      "degree": 5
+    },
+    {
+      "id": "src_lib_config_exporttoconf",
+      "label": "exportToConf()",
+      "degree": 4
+    },
+    {
+      "id": "src_lib_config_importfromconf",
+      "label": "importFromConf()",
+      "degree": 4
+    },
+    {
+      "id": "src_lib_dns_flushdns",
+      "label": "flushDns()",
+      "degree": 4
+    },
+    {
+      "id": "src_components_filemodal_filemodal",
+      "label": "FileModal()",
+      "degree": 3
+    }
+  ],
+  "surprises": [
+    {
+      "source": "App()",
+      "target": "flushDns()",
+      "source_files": [
+        "src/index.tsx",
+        "src/lib/dns.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "App()",
+      "target": "exportToConf()",
+      "source_files": [
+        "src/index.tsx",
+        "src/lib/config.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "App()",
+      "target": "importFromConf()",
+      "source_files": [
+        "src/index.tsx",
+        "src/lib/config.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "App()",
+      "target": "loadSystemHosts()",
+      "source_files": [
+        "src/index.tsx",
+        "src/lib/hosts.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "App()",
+      "target": "saveSystemHosts()",
+      "source_files": [
+        "src/index.tsx",
+        "src/lib/hosts.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `scripts` connect `scripts` to `package.json`?",
+      "why": "High betweenness centrality (0.053) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `dependencies` connect `dependencies` to `package.json`?",
+      "why": "High betweenness centrality (0.040) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `name`, `module`, `type` to the rest of the system?",
+      "why": "54 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `compilerOptions` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

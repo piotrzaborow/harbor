@@ -22,85 +22,84 @@ export function FileModal({ mode, fileAction, onClearAction, onSave, onClose }: 
   const [dirPath, setDirPath] = useState(process.cwd() + '/');
   const [fileName, setFileName] = useState('domains.conf');
   const [focusField, setFocusField] = useState<'dir' | 'file'>('dir');
-  const [suggestions, setSuggestions] = useState<string[]>(() => {
-    try {
-      const cwd = process.cwd();
-      return fs.readdirSync(cwd)
-        .filter(f => {
-          try {
-            return fs.statSync(path.join(cwd, f)).isDirectory();
-          } catch {
-            return false;
-          }
-        })
-        .map(f => f + '/')
-        .sort((a, b) => a.localeCompare(b));
-    } catch {
-      return [];
-    }
-  });
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
 
   useEffect(() => {
-    try {
-      fs.appendFileSync('/Users/piotrzaborow/Developer/harbor/debug.log', `[${new Date().toISOString()}] dirPath changed: ${dirPath}\n`);
-      const expandedPath = expandTilde(dirPath);
-      let searchDir = process.cwd();
-      let searchPrefix = expandedPath;
+    let isActive = true;
+    (async () => {
+      try {
+        const expandedPath = expandTilde(dirPath);
+        let searchDir = process.cwd();
+        let searchPrefix = expandedPath;
 
-      const isAbs = path.isAbsolute(expandedPath);
-      
-      if (isAbs) {
-        if (expandedPath.endsWith('/')) {
-          searchDir = expandedPath;
-          searchPrefix = '';
-        } else {
-          searchDir = path.dirname(expandedPath);
-          searchPrefix = path.basename(expandedPath);
-        }
-      } else {
-        if (expandedPath.includes('/')) {
-          const absolute = path.resolve(expandedPath);
+        const isAbs = path.isAbsolute(expandedPath);
+        
+        if (isAbs) {
           if (expandedPath.endsWith('/')) {
-             searchDir = absolute;
-             searchPrefix = '';
+            searchDir = expandedPath;
+            searchPrefix = '';
           } else {
-             searchDir = path.dirname(absolute);
-             searchPrefix = path.basename(absolute);
+            searchDir = path.dirname(expandedPath);
+            searchPrefix = path.basename(expandedPath);
+          }
+        } else {
+          if (expandedPath.includes('/')) {
+            const absolute = path.resolve(expandedPath);
+            if (expandedPath.endsWith('/')) {
+               searchDir = absolute;
+               searchPrefix = '';
+            } else {
+               searchDir = path.dirname(absolute);
+               searchPrefix = path.basename(absolute);
+            }
           }
         }
-      }
 
-      if (fs.existsSync(searchDir)) {
-        const files = fs.readdirSync(searchDir);
-        const processed = files.filter(f => {
-          try {
-            return fs.statSync(path.join(searchDir, f)).isDirectory();
-          } catch {
-            return false;
+        try {
+          const stats = await fs.promises.stat(searchDir);
+          if (stats.isDirectory()) {
+            const dirents = await fs.promises.readdir(searchDir, { withFileTypes: true });
+            
+            if (!isActive) return;
+
+            const processed = dirents
+              .filter(d => d.isDirectory())
+              .map(d => d.name + '/')
+              .sort((a, b) => a.localeCompare(b));
+            
+            let matches = processed;
+            if (searchPrefix) {
+              matches = processed.filter(f => f.toLowerCase().includes(searchPrefix.toLowerCase()));
+            }
+            
+            setSuggestions(matches);
+            setSelectedIndex(0);
+            setScrollTop(0);
+          } else {
+            if (isActive) {
+              setSuggestions([]);
+              setSelectedIndex(0);
+              setScrollTop(0);
+            }
           }
-        }).map(f => f + '/').sort((a, b) => a.localeCompare(b));
-        
-        let matches = processed;
-        if (searchPrefix) {
-          matches = processed.filter(f => f.toLowerCase().includes(searchPrefix.toLowerCase()));
+        } catch {
+          if (isActive) {
+            setSuggestions([]);
+            setSelectedIndex(0);
+            setScrollTop(0);
+          }
         }
-        fs.appendFileSync('/Users/piotrzaborow/Developer/harbor/debug.log', `searchDir: ${searchDir}, searchPrefix: ${searchPrefix}, matches: ${matches.length}, processed: ${processed.length}\n`);
-        
-        setSuggestions(matches);
-        setSelectedIndex(0);
-        setScrollTop(0);
-      } else {
-        setSuggestions([]);
-        setSelectedIndex(0);
-        setScrollTop(0);
+      } catch {
+        if (isActive) {
+          setSuggestions([]);
+          setSelectedIndex(0);
+          setScrollTop(0);
+        }
       }
-    } catch {
-      setSuggestions([]);
-      setSelectedIndex(0);
-      setScrollTop(0);
-    }
+    })();
+    return () => { isActive = false; };
   }, [dirPath]);
 
   useEffect(() => {
