@@ -178,6 +178,8 @@ function App() {
       let name = str.toLowerCase();
       if (str === '\u001b[A') name = 'up';
       if (str === '\u001b[B') name = 'down';
+      if (str === '\u001b[C') name = 'right';
+      if (str === '\u001b[D') name = 'left';
       if (str === '\u001b') name = 'escape';
       if (str === '\u007f' || str === '\b') name = 'backspace';
 

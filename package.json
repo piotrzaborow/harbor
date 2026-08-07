@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "start": "bun run build && sudo ./dist/harbor",
     "test": "bun test",
     "test:e2e": "bun test tests/e2e.test.ts",
     "dev": "bun run --watch src/index.tsx",

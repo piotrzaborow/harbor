@@ -28,7 +28,25 @@ jobs:
     needs: test
     strategy:
       matrix:
-        os: [mac, ubuntu, windows]
+        include:
+          - os: ubuntu
+            arch: arm64
+            version: -arm
+          - os: ubuntu
+            arch: x64
+            suffix: -x64
+          - os: mac
+            arch: arm64
+            suffix: -mac-arm
+          - os: mac
+            arch: x64
+            suffix: -mac-x64
+          - os: windows
+            arch: arm64
+            suffix: -windows-arm
+          - os: windows
+            arch: x64
+            suffix: -windows-x64
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout code
@@ -41,6 +59,7 @@ jobs:
 
       - name: Clean deps
         run: rm -rf node_modules && rm -rf bun.lock
+
       - name: Install dependencies
         run: bun install
 

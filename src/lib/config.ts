@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as path from 'path';
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import type { HostLine } from './hosts';
 
@@ -24,6 +25,10 @@ export function exportToConf(lines: HostLine[], filePath = 'domains.conf'): bool
     });
 
     const xmlContent = builder.build(obj);
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     fs.writeFileSync(filePath, xmlContent, 'utf-8');
     return true;
   } catch (err) {
