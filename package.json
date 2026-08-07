@@ -27,13 +27,5 @@
     "@opentui/react": "^0.5.1",
     "fast-xml-parser": "^5.10.1",
     "react": "^19.2.6"
-  },
-  "optionalDependencies": {
-    "@opentui/core-linux-arm64-musl": "^0.5.1",
-    "@opentui/core-linux-x64-musl": "^0.5.1",
-    "@opentui/core-darwin-arm64": "^0.5.1",
-    "@opentui/core-darwin-x64": "^0.5.1",
-    "@opentui/core-windows-arm64": "^0.5.1",
-    "@opentui/core-windows-x64": "^0.5.1"
   }
 }
