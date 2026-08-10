@@ -72,14 +72,6 @@ jobs:
           path: dist/*
 
   release:
-    strategy:
-      matrix:
-        include:
-          - registry: npm
-            registry-url: https://registry.npmjs.org
-          - registry: github
-            registry-url: https://npm.pkg.github.com
-
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -126,10 +118,10 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 24
-          registry-url: ${{ matrix.registry-url }}
+          registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
-      - name: Publish to ${{ matrix.registry }}
+      - name: Publish to NPM Registry
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{github.token}}
+          NPM_CONFIG_PROVENANCE: true

@@ -1,7 +1,10 @@
 {
   "name": "laneway",
   "version": "1.0.1",
-  "repository": "https://github.com/piotrzaborow/laneway",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotrzaborow/laneway.git",
+  },
   "module": "src/index.tsx",
   "type": "module",
   "bin": {
