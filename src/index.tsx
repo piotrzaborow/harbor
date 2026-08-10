@@ -96,7 +96,7 @@ function App() {
       // Clear dirty flags
       setLines(lines.map(l => ({ ...l, isDirty: false })));
       setStatusMessage('Saved');
-      
+
       const flushed = await flushDns();
       if (flushed) {
         setStatusMessage('Ready');
@@ -242,16 +242,16 @@ function App() {
   return (
     <box flexDirection="column" width="100%" height="100%">
       <TopNav />
-      
+
       <box flexGrow={1} flexDirection="row">
-        <DomainList 
-          entries={lines} 
-          selectedIndex={selectedIndex} 
+        <DomainList
+          entries={lines}
+          selectedIndex={selectedIndex}
         />
-        
+
         {modalState === 'add' || modalState === 'edit' ? (
-          <DomainForm 
-            initialData={modalState === 'edit' ? selectedEntry : undefined} 
+          <DomainForm
+            initialData={modalState === 'edit' ? selectedEntry : undefined}
             focusField={formFocus}
             onSave={handleSaveDomain}
             onCancel={() => setModalState('none')}
@@ -263,7 +263,7 @@ function App() {
       </box>
 
       {(modalState === 'export' || modalState === 'import') && (
-        <FileModal 
+        <FileModal
           mode={modalState as 'export' | 'import'}
           fileAction={fileAction}
           onClearAction={() => setFileAction(null)}

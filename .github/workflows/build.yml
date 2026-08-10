@@ -95,6 +95,11 @@ jobs:
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
+      - name: Publish OS-Specific Bundles
+        run: bun run scripts/publish-bundles.js
+        env:
+          NPM_CONFIG_PROVENANCE: true
+
       - name: Publish to NPM Registry
         run: npm publish
         env:
