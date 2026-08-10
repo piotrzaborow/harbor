@@ -104,12 +104,12 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           files: |
-            dist/harbor-macOS-arm64
-            dist/harbor-macOS-x64
-            dist/harbor-ubuntu-arm64
-            dist/harbor-ubuntu-x64
-            dist/harbor-windows-arm64.exe
-            dist/harbor-windows-x64.exe
+            ${{steps.download-artifact.outputs.download-path}}/harbor-macOS-arm64
+            ${{steps.download-artifact.outputs.download-path}}/harbor-macOS-x64
+            ${{steps.download-artifact.outputs.download-path}}/harbor-ubuntu-arm64
+            ${{steps.download-artifact.outputs.download-path}}/harbor-ubuntu-x64
+            ${{steps.download-artifact.outputs.download-path}}/harbor-windows-arm64.exe
+            ${{steps.download-artifact.outputs.download-path}}/harbor-windows-x64.exe
           body: |
             **Harbor – Version ${{ github.ref_name }}**
             For detailed changes in this version, see the automatically generated notes.
