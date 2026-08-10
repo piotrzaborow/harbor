@@ -1,6 +1,6 @@
 {
   "name": "laneway",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/piotrzaborow/laneway.git"
@@ -9,14 +9,12 @@
   "module": "src/index.tsx",
   "type": "module",
   "bin": {
-    "laneway": "bin/laneway"
+    "laneway": "bin/laneway.js"
   },
   "files": [
-    "bin",
-    "scripts/npm-install.js"
+    "bin"
   ],
   "scripts": {
-    "postinstall": "node scripts/npm-install.js",
     "start": "bun run build && sudo ./dist/laneway",
     "test": "bun test",
     "test:e2e": "bun test tests/e2e.test.ts",
@@ -47,5 +45,13 @@
     "@opentui/react": "^0.5.1",
     "fast-xml-parser": "^5.10.1",
     "react": "^19.2.6"
+  },
+  "optionalDependencies": {
+    "@piotrzaborow/laneway-darwin-arm64": "^1.0.1",
+    "@piotrzaborow/laneway-darwin-x64": "^1.0.1",
+    "@piotrzaborow/laneway-linux-arm64": "^1.0.1",
+    "@piotrzaborow/laneway-linux-x64": "^1.0.1",
+    "@piotrzaborow/laneway-windows-arm64": "^1.0.1",
+    "@piotrzaborow/laneway-windows-x64": "^1.0.1"
   }
 }
