@@ -5,7 +5,7 @@ import { promisify } from 'util';
 const execAsync = promisify(exec);
 
 export async function flushDns(): Promise<boolean> {
-  if (process.env.HARBOR_DISABLE_FLUSH) {
+  if (process.env.LANEWAY_DISABLE_FLUSH) {
     return true;
   }
 

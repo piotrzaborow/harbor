@@ -2,7 +2,7 @@ import { test, expect, describe, afterAll, beforeAll } from "bun:test";
 import * as fs from 'fs';
 import * as path from 'path';
 
-describe("Harbor E2E TUI flow", () => {
+describe("Laneway E2E TUI flow", () => {
   const mockHostsPath = path.join(process.cwd(), 'mock_hosts_e2e.txt');
   const initialContent = `127.0.0.1\tlocalhost\n255.255.255.255\tbroadcasthost\n::1\tlocalhost\n`;
 
@@ -21,9 +21,9 @@ describe("Harbor E2E TUI flow", () => {
     const proc = Bun.spawn(["bun", "src/index.tsx"], {
       env: {
         ...process.env,
-        HARBOR_HOSTS_PATH: mockHostsPath,
-        HARBOR_DISABLE_FLUSH: "1",
-        HARBOR_TEST_MODE: "1"
+        LANEWAY_HOSTS_PATH: mockHostsPath,
+        LANEWAY_DISABLE_FLUSH: "1",
+        LANEWAY_TEST_MODE: "1"
       },
       stdin: "pipe",
       stdout: "pipe",

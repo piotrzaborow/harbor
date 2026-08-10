@@ -190,7 +190,7 @@ function App() {
       handleGlobalKey({ name });
     };
 
-    const shouldListen = process.stdin.isTTY || process.env.HARBOR_TEST_MODE;
+    const shouldListen = process.stdin.isTTY || process.env.LANEWAY_TEST_MODE;
     if (shouldListen) {
       if (typeof process.stdin.setRawMode === 'function') {
         process.stdin.setRawMode(true);

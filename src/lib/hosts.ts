@@ -12,8 +12,8 @@ export type HostLine = {
 };
 
 export function getHostsFilePath(): string {
-  if (process.env.HARBOR_HOSTS_PATH) {
-    return process.env.HARBOR_HOSTS_PATH;
+  if (process.env.LANEWAY_HOSTS_PATH) {
+    return process.env.LANEWAY_HOSTS_PATH;
   }
   if (os.platform() === 'win32') {
     return 'C:\\Windows\\System32\\drivers\\etc\\hosts';

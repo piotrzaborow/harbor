@@ -1,6 +1,6 @@
-# Harbor Domain Manager
+# Laneway Domain Manager
 
-Harbor is a blazingly fast, modern Terminal UI (TUI) application for managing your system's `/etc/hosts` file. It is built with [Bun](https://bun.sh) and [@opentui/react](https://github.com/opentui/opentui), providing a fully reactive interface directly in your terminal.
+Laneway is a blazingly fast, modern Terminal UI (TUI) application for managing your system's `/etc/hosts` file. It is built with [Bun](https://bun.sh) and [@opentui/react](https://github.com/opentui/opentui), providing a fully reactive interface directly in your terminal.
 
 ## Features
 
@@ -14,28 +14,20 @@ Harbor is a blazingly fast, modern Terminal UI (TUI) application for managing yo
 
 ### Option 1: NPM (Recommended)
 
-You can install Harbor globally via NPM. This will automatically download the correct standalone binary for your operating system:
+You can install Laneway globally via NPM. This will automatically download the correct standalone binary for your operating system:
 
 ```bash
-npm install -g harbor
+npm install -g laneway
 ```
 
-### Option 2: Homebrew (macOS / Linux)
-
-You can install Harbor directly from this repository using Homebrew:
-
-```bash
-brew install piotrzaborow/harbor/harbor
-```
-
-### Option 3: From Source
+### Option 2: From Source
 
 Ensure you have [Bun](https://bun.sh) installed.
 
 ```bash
 # Clone the repository
-git clone https://github.com/piotrzaborow/harbor.git
-cd harbor
+git clone https://github.com/piotrzaborow/laneway.git
+cd laneway
 
 # Install dependencies
 bun install
@@ -45,7 +37,7 @@ bun install
 
 ### Development
 
-To run Harbor in development mode with hot-reloading:
+To run Laneway in development mode with hot-reloading:
 
 ```bash
 bun run dev
@@ -55,7 +47,7 @@ bun run dev
 
 ### Production Build
 
-To compile Harbor into a standalone, highly-optimized executable:
+To compile Laneway into a standalone, highly-optimized executable:
 
 ```bash
 bun run build
@@ -64,7 +56,7 @@ bun run build
 Then run the binary with `sudo` to enable writing to `/etc/hosts`:
 
 ```bash
-sudo ./dist/harbor
+sudo ./dist/laneway
 ```
 
 We also have pre-configured build scripts for cross-platform compilation (e.g., `build:mac:x64`, `build:linux:arm`). Check `package.json` for all available targets.
@@ -86,7 +78,7 @@ We also have pre-configured build scripts for cross-platform compilation (e.g., 
 
 ## Testing
 
-Harbor includes both unit tests and End-to-End (E2E) tests.
+Laneway includes both unit tests and End-to-End (E2E) tests.
 
 ```bash
 # Run all tests

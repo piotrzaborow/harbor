@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const REPO = 'piotrzaborow/harbor';
+const REPO = 'piotrzaborow/laneway';
 
 // If the src directory exists, this is a local install (development/CI) and we should skip downloading the binary.
 if (fs.existsSync(path.join(__dirname, '..', 'src', 'index.tsx'))) {
@@ -47,16 +47,16 @@ async function downloadBinary() {
     process.exit(1);
   }
 
-  const binaryName = platform === 'windows' ? `harbor-${platform}-${arch}.exe` : `harbor-${platform}-${arch}`;
+  const binaryName = platform === 'windows' ? `laneway-${platform}-${arch}.exe` : `laneway-${platform}-${arch}`;
   const downloadUrl = `https://github.com/${REPO}/releases/download/v${VERSION}/${binaryName}`;
   const binDir = path.join(__dirname, '..', 'bin');
-  const destPath = path.join(binDir, platform === 'windows' ? 'harbor.exe' : 'harbor');
+  const destPath = path.join(binDir, platform === 'windows' ? 'laneway.exe' : 'laneway');
 
   if (!fs.existsSync(binDir)) {
     fs.mkdirSync(binDir, { recursive: true });
   }
 
-  console.log(`Downloading Harbor CLI from ${downloadUrl}...`);
+  console.log(`Downloading Laneway CLI from ${downloadUrl}...`);
 
   return new Promise((resolve, reject) => {
     https.get(downloadUrl, (response) => {
@@ -87,7 +87,7 @@ function saveFile(response, destPath, resolve, reject) {
     if (process.platform !== 'win32') {
       fs.chmodSync(destPath, 0o755);
     }
-    console.log(`Successfully installed Harbor CLI to ${destPath}`);
+    console.log(`Successfully installed Laneway CLI to ${destPath}`);
     resolve();
   });
   file.on('error', (err) => {
