@@ -1,4 +1,4 @@
-name: Build Harbor
+name: Build & Publish Laneway
 run-name: Build version ${{ github.ref_name }}
 on:
   push:
@@ -68,7 +68,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: harbor-binaries
+          name: laneway-binaries
           path: dist/*
 
   release:
@@ -84,7 +84,7 @@ jobs:
         id: download-artifact
         uses: actions/download-artifact@v7
         with:
-          name: harbor-binaries
+          name: laneway-binaries
           path: dist/
 
       - name: Get Tag name
@@ -99,14 +99,14 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           files: |
-            ${{steps.download-artifact.outputs.download-path}}/harbor-macOS-arm64
-            ${{steps.download-artifact.outputs.download-path}}/harbor-macOS-x64
-            ${{steps.download-artifact.outputs.download-path}}/harbor-ubuntu-arm64
-            ${{steps.download-artifact.outputs.download-path}}/harbor-ubuntu-x64
-            ${{steps.download-artifact.outputs.download-path}}/harbor-windows-arm64.exe
-            ${{steps.download-artifact.outputs.download-path}}/harbor-windows-x64.exe
+            ${{steps.download-artifact.outputs.download-path}}/laneway-macOS-arm64
+            ${{steps.download-artifact.outputs.download-path}}/laneway-macOS-x64
+            ${{steps.download-artifact.outputs.download-path}}/laneway-ubuntu-arm64
+            ${{steps.download-artifact.outputs.download-path}}/laneway-ubuntu-x64
+            ${{steps.download-artifact.outputs.download-path}}/Laneway-windows-arm64.exe
+            ${{steps.download-artifact.outputs.download-path}}/laneway-windows-x64.exe
           body: |
-            **Harbor – Version ${{ github.ref_name }}**
+            **Laneway – Version ${{ github.ref_name }}**
             For detailed changes in this version, see the automatically generated notes.
           generate_release_notes: true
           make_latest: "true"
