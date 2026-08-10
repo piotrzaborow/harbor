@@ -73,19 +73,15 @@ jobs:
       matrix:
         include:
           - registry: npm
-            registry-url: https://registry.npmjs.org/
+            registry-url: https://registry.npmjs.org
           - registry: github
-            registry-url: https://npm.pkg.github.com/
+            registry-url: https://npm.pkg.github.com
 
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
       - name: Download Artifacts
         id: download-artifact
         uses: actions/download-artifact@v7
@@ -97,27 +93,36 @@ jobs:
         id: vars
         run: echo "TAG_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 
+      - name: List files
+        run: ls -laR dist
+
       # Generate GitHub Release
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          files: ${{ steps.download-artifact.outputs.download-path }}
-          body: |
-            **Harbor – Version ${{ github.ref_name }}**
-            For detailed changes in this version, see the automatically generated notes.
-          generate_release_notes: true
-          make_latest: "true"
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      # - name: Create GitHub Release
+      #   uses: softprops/action-gh-release@v3
+      #   with:
+      #     files: |
+      #       dist/harbor-macOS-arm64
+      #       dist/harbor-macOS-x64
+      #       dist/harbor-ubuntu-arm64
+      #       dist/harbor-ubuntu-x64
+      #       dist/harbor-windows-x64
+      #     body: |
+      #       **Harbor – Version ${{ github.ref_name }}**
+      #       For detailed changes in this version, see the automatically generated notes.
+      #     generate_release_notes: true
+      #     make_latest: "true"
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
 
-      # Publish to NPM
-      - name: Setup Node
-        uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          registry-url: ${{ matrix.registry-url }}
+      # # Publish to NPM
+      # - name: Setup Node
+      #   uses: actions/setup-node@v7
+      #   with:
+      #     node-version: 24
+      #     registry-url: ${{ matrix.registry-url }}
+      #     package-manager-cache: false
 
-      - name: Publish to ${{ matrix.registry }}
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{github.token}}
+      # - name: Publish to ${{ matrix.registry }}
+      #   run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{github.token}}
