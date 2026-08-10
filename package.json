@@ -1,6 +1,7 @@
 {
   "name": "harbor",
   "version": "0.1.0",
+  "repository": "https://github.com/pitorzaborow/harbor",
   "module": "src/index.tsx",
   "type": "module",
   "bin": {
