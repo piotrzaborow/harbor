@@ -22,6 +22,7 @@
     "build:mac:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-darwin-x64 --outfile dist/laneway-mac-x64",
     "build:ubuntu:arm": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-linux-arm64 --outfile dist/laneway-linux-arm",
     "build:ubuntu:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-linux-x64 --outfile dist/laneway-linux-x64",
+    "build:windows:arm": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-windows-arm64 --outfile dist/laneway-windows-arm64.exe",
     "build:windows:x64": "bun build src/index.tsx --compile --minify --sourcemap --target=bun-windows-x64 --outfile dist/laneway-windows-x64.exe"
   },
   "devDependencies": {

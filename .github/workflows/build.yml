@@ -59,6 +59,9 @@ jobs:
       - name: Build Ubuntu (x64)
         run: bun run build:ubuntu:x64
 
+      - name: Build Windows (arm64)
+        run: bun run build:windows:arm
+
       - name: Build Windows (x64)
         run: bun run build:windows:x64
 
@@ -97,32 +100,33 @@ jobs:
         run: ls -laR dist
 
       # Generate GitHub Release
-      # - name: Create GitHub Release
-      #   uses: softprops/action-gh-release@v3
-      #   with:
-      #     files: |
-      #       dist/harbor-macOS-arm64
-      #       dist/harbor-macOS-x64
-      #       dist/harbor-ubuntu-arm64
-      #       dist/harbor-ubuntu-x64
-      #       dist/harbor-windows-x64
-      #     body: |
-      #       **Harbor – Version ${{ github.ref_name }}**
-      #       For detailed changes in this version, see the automatically generated notes.
-      #     generate_release_notes: true
-      #     make_latest: "true"
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            dist/harbor-macOS-arm64
+            dist/harbor-macOS-x64
+            dist/harbor-ubuntu-arm64
+            dist/harbor-ubuntu-x64
+            dist/harbor-windows-arm64.exe
+            dist/harbor-windows-x64.exe
+          body: |
+            **Harbor – Version ${{ github.ref_name }}**
+            For detailed changes in this version, see the automatically generated notes.
+          generate_release_notes: true
+          make_latest: "true"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
-      # # Publish to NPM
-      # - name: Setup Node
-      #   uses: actions/setup-node@v7
-      #   with:
-      #     node-version: 24
-      #     registry-url: ${{ matrix.registry-url }}
-      #     package-manager-cache: false
+      # Publish to NPM
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: ${{ matrix.registry-url }}
+          package-manager-cache: false
 
-      # - name: Publish to ${{ matrix.registry }}
-      #   run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{github.token}}
+      - name: Publish to ${{ matrix.registry }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{github.token}}
