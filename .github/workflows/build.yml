@@ -120,3 +120,5 @@ jobs:
 
       - name: Publish to ${{ matrix.registry }}
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{github.token}}
