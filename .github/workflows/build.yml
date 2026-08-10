@@ -43,28 +43,13 @@ jobs:
       - name: Install dependencies (with cross-platform native modules)
         run: bun install --os="*" --cpu="*" --force
 
-      - name: Build macOS (arm64)
-        run: bun run build:mac:arm
-
-      - name: Build macOS (x64)
-        run: bun run build:mac:x64
-
-      - name: Build Ubuntu (arm64)
-        run: bun run build:ubuntu:arm
-
-      - name: Build Ubuntu (x64)
-        run: bun run build:ubuntu:x64
-
-      - name: Build Windows (arm64)
-        run: bun run build:windows:arm
-
-      - name: Build Windows (x64)
-        run: bun run build:windows:x64
+      - name: Build
+        run: bun run build
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: laneway-binaries
+          name: laneway
           path: dist/*
 
   release:
@@ -81,15 +66,12 @@ jobs:
         id: download-artifact
         uses: actions/download-artifact@v7
         with:
-          name: laneway-binaries
+          name: laneway
           path: dist/
 
       - name: Get Tag name
         id: vars
         run: echo "TAG_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-
-      - name: List files
-        run: ls -laR dist
 
       # Generate GitHub Release
       - name: Create GitHub Release
@@ -112,11 +94,6 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
-
-      - name: Publish Platform Packages
-        run: bun run scripts/publish-packages.js
-        env:
-          NPM_CONFIG_PROVENANCE: true
 
       - name: Publish to NPM Registry
         run: npm publish
