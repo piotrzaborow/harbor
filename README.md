@@ -93,4 +93,4 @@ bun run test:e2e
 The E2E tests are configured to use a mocked, temporary hosts file and bypass actual DNS flushing, so they are completely safe to run without `sudo` privileges.
 
 ## License
-MIT
+AGPL-3.0

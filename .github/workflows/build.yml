@@ -96,12 +96,7 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           files: |
-            ${{steps.download-artifact.outputs.download-path}}/laneway-macOS-arm64
-            ${{steps.download-artifact.outputs.download-path}}/laneway-macOS-x64
-            ${{steps.download-artifact.outputs.download-path}}/laneway-ubuntu-arm64
-            ${{steps.download-artifact.outputs.download-path}}/laneway-ubuntu-x64
-            ${{steps.download-artifact.outputs.download-path}}/Laneway-windows-arm64.exe
-            ${{steps.download-artifact.outputs.download-path}}/laneway-windows-x64.exe
+            ${{steps.download-artifact.outputs.download-path}}/*
           body: |
             **Laneway – Version ${{ github.ref_name }}**
             For detailed changes in this version, see the automatically generated notes.
