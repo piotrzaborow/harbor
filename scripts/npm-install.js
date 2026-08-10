@@ -7,6 +7,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const REPO = 'piotrzaborow/harbor';
+
+// If the src directory exists, this is a local install (development/CI) and we should skip downloading the binary.
+if (fs.existsSync(path.join(__dirname, '..', 'src', 'index.tsx'))) {
+  console.log('Local development or CI build detected (source files present). Skipping binary download.');
+  process.exit(0);
+}
+
 // Use process.env.npm_package_version, fallback to reading package.json manually
 let VERSION = process.env.npm_package_version;
 if (!VERSION) {
