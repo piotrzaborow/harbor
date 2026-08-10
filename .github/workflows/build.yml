@@ -64,7 +64,7 @@ jobs:
         run: bun run build:windows:x64
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: harbor-binaries
           path: dist/*
@@ -89,7 +89,7 @@ jobs:
 
       - name: Download Artifacts
         id: download-artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: harbor-binaries
           path: dist/
@@ -100,7 +100,7 @@ jobs:
 
       # Generate GitHub Release
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: ${{ steps.download-artifact.outputs.download-path }}
           body: |
@@ -113,7 +113,7 @@ jobs:
 
       # Publish to NPM
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           registry-url: ${{ matrix.registry-url }}
