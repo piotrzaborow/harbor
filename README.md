@@ -1,4 +1,6 @@
-# Laneway Domain Manager
+# Laneway
+
+![Logo](./public/logo.png)
 
 Laneway is a blazingly fast, modern Terminal UI (TUI) application for managing your system's `/etc/hosts` file. It is built with [Bun](https://bun.sh) and [@opentui/react](https://github.com/opentui/opentui), providing a fully reactive interface directly in your terminal.
 
