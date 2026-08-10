@@ -1,5 +1,5 @@
 name: Build Harbor
-
+run-name: Build version ${{ github.ref_name }}
 on:
   push:
     tags:
@@ -85,6 +85,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
       - name: Download Artifacts
         id: download-artifact
         uses: actions/download-artifact@v7
