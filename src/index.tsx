@@ -7,8 +7,7 @@ import * as path from 'path';
 import * as os from 'os';
 import { flushDns } from './lib/dns';
 import { exportToConf, importFromConf } from './lib/config';
-import { checkForUpdate, performUpdate } from './lib/update';
-import pkg from '../package.json';
+
 
 const expandTilde = (p: string) => {
   if (p.startsWith('~/')) {
@@ -29,14 +28,7 @@ function App() {
   const [formFocus, setFormFocus] = useState<'ip' | 'domain'>('ip');
   const [fileAction, setFileAction] = useState<'up' | 'down' | 'tab' | 'left' | null>(null);
   const [statusMessage, setStatusMessage] = useState<string>('Ready');
-  const [updateAvailable, setUpdateAvailable] = useState<string | null>(null);
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
-  useEffect(() => {
-    checkForUpdate(pkg.version).then((newVersion) => {
-      if (newVersion) setUpdateAvailable(newVersion);
-    });
-  }, []);
 
   useEffect(() => {
     const loaded = loadSystemHosts();
@@ -132,18 +124,7 @@ function App() {
     setModalState('none');
   };
 
-  const handleAutoUpdate = async () => {
-    setIsUpdating(true);
-    setStatusMessage(`Updating to v${updateAvailable}... Please wait.`);
-    const success = await performUpdate();
-    if (success) {
-      setStatusMessage('Update successful! Please quit and restart Laneway.');
-      setUpdateAvailable(null);
-    } else {
-      setStatusMessage(`Update failed. Run 'npm install -g laneway@latest' manually.`);
-    }
-    setIsUpdating(false);
-  };
+
 
   useEffect(() => {
     const handleGlobalKey = (key: any) => {
@@ -189,7 +170,7 @@ function App() {
       if (key.name === 's') handleSaveToHosts();
       if (key.name === 'x') setModalState('export');
       if (key.name === 'i') setModalState('import');
-      if (key.name === 'u' && updateAvailable && !isUpdating) handleAutoUpdate();
+
       if (key.name === 'q') process.exit(0);
     };
 
@@ -206,7 +187,6 @@ function App() {
       if (str === '\u001b[D') name = 'left';
       if (str === '\u001b') name = 'escape';
       if (str === '\u007f' || str === '\b') name = 'backspace';
-      if (str === 'u' || str === 'U') name = 'u';
 
       if (str === '\u0003') {
         process.exit(0); // Handle Ctrl+C globally
@@ -229,7 +209,7 @@ function App() {
         process.stdin.removeListener('data', onData);
       }
     };
-  }, [selectedIndex, lines, modalState, entryLines, selectedEntry, updateAvailable, isUpdating]);
+  }, [selectedIndex, lines, modalState, entryLines, selectedEntry]);
 
   let statusBarColor = 'gray';
   const lowerStatus = statusMessage.toLowerCase();
@@ -273,9 +253,7 @@ function App() {
       )}
       <box width="100%" backgroundColor={statusBarColor as any} paddingX={1} justifyContent="space-between">
         <text>Status: {statusMessage}</text>
-        {updateAvailable && !isUpdating && (
-          <text color="yellow">Update available: v{updateAvailable} (Press 'U')</text>
-        )}
+
       </box>
     </box>
   );
