@@ -43,8 +43,23 @@ jobs:
       - name: Install dependencies (with cross-platform native modules)
         run: bun install --os="*" --cpu="*" --force
 
-      - name: Build
-        run: bun run build
+      - name: Build macOS (arm64)
+        run: bun run build:darwin:arm64
+
+      - name: Build macOS (x64)
+        run: bun run build:darwin:x64
+
+      - name: Build Linux (arm64)
+        run: bun run build:linux:arm64
+
+      - name: Build Linux (x64)
+        run: bun run build:linux:x64
+
+      - name: Build Windows (arm64)
+        run: bun run build:windows:arm64
+
+      - name: Build Windows (x64)
+        run: bun run build:windows:x64
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
