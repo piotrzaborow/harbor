@@ -32,7 +32,27 @@ function App() {
 
   useEffect(() => {
     const loaded = loadSystemHosts();
-    setLines(loaded);
+    
+    // Check for --import-config flag
+    const args = process.argv;
+    const importIndex = args.indexOf('--import-config');
+    let imported: HostLine[] = [];
+    
+    if (importIndex !== -1 && args[importIndex + 1]) {
+      const filePath = args[importIndex + 1];
+      const absolutePath = path.resolve(expandTilde(filePath));
+      const parsedImport = importFromConf(absolutePath);
+      if (parsedImport.length > 0) {
+        imported = parsedImport.map(l => ({ ...l, isDirty: true }));
+      }
+    }
+    
+    if (imported.length > 0) {
+      setLines([...loaded, ...imported]);
+      setStatusMessage('Unsaved (Imported Configuration)');
+    } else {
+      setLines(loaded);
+    }
   }, []);
 
   const entryLines = React.useMemo(() => lines.filter((l: HostLine) => l.type === 'entry'), [lines]);
@@ -260,31 +280,6 @@ function App() {
 }
 
 (async () => {
-  const args = process.argv;
-  const importIndex = args.indexOf('--import-config');
-  if (importIndex !== -1 && args[importIndex + 1]) {
-    const filePath = args[importIndex + 1];
-    const absolutePath = path.resolve(expandTilde(filePath));
-    const imported = importFromConf(absolutePath);
-    if (imported.length > 0) {
-      const existing = loadSystemHosts();
-      const newLines = [...existing, ...imported];
-      if (saveSystemHosts(newLines)) {
-        await flushDns();
-        console.log(`Successfully imported configuration from ${filePath}`);
-        process.exit(0);
-      } else {
-        const platform = os.platform();
-        const privMsg = platform === 'win32' ? 'Administrator privileges' : 'sudo privileges';
-        console.error(`Failed to save system hosts (do you have ${privMsg}?)`);
-        process.exit(1);
-      }
-    } else {
-      console.error(`Failed to import configuration from ${filePath}, or file is empty.`);
-      process.exit(1);
-    }
-  }
-
   const renderer = await createCliRenderer();
   createRoot(renderer).render(<App />);
 })();
