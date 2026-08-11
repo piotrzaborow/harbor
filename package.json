@@ -1,6 +1,6 @@
 {
   "name": "laneway",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/piotrzaborow/laneway.git"
@@ -9,12 +9,13 @@
   "module": "src/index.tsx",
   "type": "module",
   "bin": {
-    "laneway": "./bin/index.js"
+    "laneway": "./bin/index.cjs"
   },
   "files": [
     "bin"
   ],
   "scripts": {
+    "uninstall": "node ./bin/uninstall.cjs",
     "start": "bun run build && sudo ./dist/laneway",
     "test": "bun test",
     "test:e2e": "bun test tests/e2e.test.ts",
