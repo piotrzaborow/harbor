@@ -95,7 +95,8 @@ export function saveSystemHosts(lines: HostLine[]): boolean {
     fs.writeFileSync(filePath, content, 'utf-8');
     return true;
   } catch (err) {
-    console.error('Failed to write hosts file (do you have sudo privileges?)', err);
+    const privMsg = os.platform() === 'win32' ? 'Administrator privileges' : 'sudo privileges';
+    console.error(`Failed to write hosts file (do you have ${privMsg}?)`, err);
     return false;
   }
 }
